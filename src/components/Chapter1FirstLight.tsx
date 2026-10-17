@@ -282,7 +282,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
               transition={{ duration: 0.75, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="text-[#E0D9C9]/90 text-[18px] md:text-xl font-light leading-relaxed tracking-wide max-w-lg mb-8"
             >
-              For everyday life, thought through from the inside out.
+              We build homes for everyday life — designed from the inside out.
             </motion.p>
 
             {/* Contextual Hero CTA: "See our work" */}

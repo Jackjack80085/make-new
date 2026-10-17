@@ -202,7 +202,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                   <p className="text-[18px] text-[#242D36]/80 font-light leading-relaxed pb-2 border-b border-[#242D36]/10">
-                    We read every message and write back personally. Just say hello.
+                    We read every message and we write back personally. Just say hello.
                   </p>
 
                   {/* Name Field */}

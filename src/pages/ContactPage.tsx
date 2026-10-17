@@ -42,7 +42,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigateHome }) => {
             Say hello.
           </h1>
           <p className="text-[18px] md:text-xl text-[#242D36]/80 font-light max-w-2xl leading-relaxed">
-            We read every message and write back personally. Just say hello.
+            We read every message and we write back personally. Just say hello.
           </p>
         </div>
 

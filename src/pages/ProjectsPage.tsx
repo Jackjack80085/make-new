@@ -41,7 +41,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
       id: 'make-sampigehalli',
       number: '01',
       name: 'Make Sampigehalli',
-      tagline: 'Homes shaped around daylight and private gardens.',
+      tagline: 'Homes that feel like home from the first day. North Bengaluru.',
       status: 'Coming Soon',
       location: 'North Bengaluru',
       orientation: 'East-Facing Courtyard Matrix',
@@ -64,7 +64,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
       id: 'make-borough',
       number: '02',
       name: 'Make Borough',
-      tagline: 'Where our principles were first set in stone.',
+      tagline: 'Where it began. Completed and handed over.',
       status: 'Completed',
       location: 'Central Bengaluru',
       orientation: 'North-South Cross Ventilation',
@@ -173,7 +173,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-base sm:text-lg text-[#242D36]/75 font-light leading-relaxed"
             >
-              We build few homes slowly, with personal custody of every detail. Each residence begins with the quiet rhythms of the people who will live there.
+              Every project starts with the same question: what is it actually like to live here? That question shapes everything — the layout, where light falls, the details most people never consciously notice but feel every single day.
             </motion.p>
           </div>
         </div>
