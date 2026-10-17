@@ -50,12 +50,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 w-full max-w-3xl bg-[#E0D9C9] paper-grain plaster-surface text-[#242D36] border border-[#242D36]/20 shadow-2xl overflow-hidden my-auto max-h-[90vh] flex flex-col"
+            className="relative z-10 w-full max-w-3xl bg-[#E0D9C9] paper-grain plaster-surface text-[#242D36] border border-[#242D36]/20 shadow-2xl overflow-hidden my-auto max-h-[calc(100dvh-2rem)] sm:max-h-[90dvh] flex flex-col"
           >
             {/* Modal Header */}
-            <div className="p-6 md:p-8 border-b border-[#242D36]/15 flex items-center justify-between bg-[#E0D9C9]/95 backdrop-blur-sm sticky top-0 z-20">
+            <div className="p-4 sm:p-6 md:p-8 shrink-0 gap-3 border-b border-[#242D36]/15 flex items-center justify-between bg-[#E0D9C9]/95 backdrop-blur-sm sticky top-0 z-20">
               <div>
-                <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-[#59212C] font-accent font-semibold mb-1">
+                <div className="flex flex-wrap items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-[#59212C] font-accent font-semibold mb-1">
                   <span>PROJECT OVERVIEW</span>
                   <span>·</span>
                   <span>{project.status}</span>
@@ -68,7 +68,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
               {/* Circular Close Button */}
               <button
                 onClick={onClose}
-                className="w-10 h-10 rounded-full border border-[#242D36]/20 hover:border-[#59212C] hover:text-[#59212C] flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#59212C]"
+                className="w-11 h-11 shrink-0 rounded-full border border-[#242D36]/20 hover:border-[#59212C] hover:text-[#59212C] flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#59212C]"
                 aria-label="Close project details"
               >
                 <X className="w-4 h-4" />
@@ -76,7 +76,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 md:p-8 overflow-y-auto space-y-8">
+            <div className="p-4 sm:p-6 md:p-8 min-h-0 overflow-y-auto space-y-8">
               {/* Image Frame */}
               <div className="relative aspect-[16/10] overflow-hidden bg-[#D8D0BF] border border-[#242D36]/15 shadow-sm">
                 <img
@@ -130,7 +130,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
             </div>
 
             {/* Modal Actions */}
-            <div className="p-6 md:p-8 bg-[#D8D0BF]/50 border-t border-[#242D36]/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-4 sm:p-6 md:p-8 shrink-0 bg-[#D8D0BF]/50 border-t border-[#242D36]/15 flex flex-col sm:flex-row items-center justify-between gap-4">
               <span className="text-xs text-[#242D36]/70 font-accent">
                 Interested in {project.name}?
               </span>
@@ -147,7 +147,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
                     onClose();
                     onEnquire(project.name);
                   }}
-                  className="inline-flex items-center justify-center gap-2 bg-[#59212C] text-[#E0D9C9] hover:bg-[#6e2936] px-8 py-3 text-xs font-accent uppercase tracking-widest font-medium rounded-full transition-colors min-h-[48px] flex-1 sm:flex-initial shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 bg-[#59212C] text-[#E0D9C9] hover:bg-[#6e2936] px-4 sm:px-8 py-3 text-xs font-accent uppercase tracking-widest font-medium rounded-full transition-colors min-h-[48px] flex-1 sm:flex-initial shadow-sm"
                 >
                   <span>Enquire</span>
                   <ArrowRight className="w-3.5 h-3.5" />

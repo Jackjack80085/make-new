@@ -158,7 +158,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
             className="fixed inset-y-0 right-0 max-w-full w-full sm:max-w-lg bg-[#E0D9C9] paper-grain plaster-surface text-[#242D36] border-l border-[#242D36]/15 shadow-2xl z-10 flex flex-col justify-between"
           >
             {/* Drawer Header */}
-            <div className="p-6 md:p-8 border-b border-[#242D36]/15 flex items-center justify-between bg-[#E0D9C9]/95 backdrop-blur-sm sticky top-0 z-20">
+            <div className="p-4 sm:p-6 md:p-8 shrink-0 gap-3 border-b border-[#242D36]/15 flex items-center justify-between bg-[#E0D9C9]/95 backdrop-blur-sm sticky top-0 z-20">
               <div>
                 <span className="text-[10px] font-accent uppercase tracking-[0.24em] text-[#59212C] font-semibold block mb-1">
                   MAKE DIRECT ENQUIRY
@@ -171,7 +171,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
               {/* Circular Close Button */}
               <button
                 onClick={handleClose}
-                className="w-10 h-10 rounded-full border border-[#242D36]/20 hover:border-[#59212C] hover:text-[#59212C] flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#59212C]"
+                className="w-11 h-11 shrink-0 rounded-full border border-[#242D36]/20 hover:border-[#59212C] hover:text-[#59212C] flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#59212C]"
                 aria-label="Close enquiry panel"
               >
                 <X className="w-4 h-4" />
@@ -179,7 +179,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
             </div>
 
             {/* Drawer Scrollable Content */}
-            <div className="p-6 md:p-8 overflow-y-auto flex-1">
+            <div className="p-4 sm:p-6 md:p-8 min-h-0 overflow-y-auto overscroll-contain flex-1">
               {submitted ? (
                 <div className="py-12 text-center">
                   <div className="w-14 h-14 rounded-full bg-[#59212C] text-[#E0D9C9] flex items-center justify-center mx-auto mb-6">
@@ -348,7 +348,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
             </div>
 
             {/* Panel Footer */}
-            <div className="p-6 md:p-8 bg-[#D8D0BF]/50 border-t border-[#242D36]/10 text-xs text-[#242D36]/70 leading-relaxed">
+            <div className="p-4 sm:p-6 md:p-8 shrink-0 bg-[#D8D0BF]/50 border-t border-[#242D36]/10 text-xs text-[#242D36]/70 leading-relaxed">
               <span className="font-semibold text-[#59212C]">STUDIO DESK:</span> Indiranagar, Bangalore · {BRAND_CONFIG.contact.email}
             </div>
           </motion.div>

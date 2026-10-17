@@ -117,7 +117,7 @@ export const Navigation: React.FC<NavigationProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${theme.bg} ${theme.text}`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 h-20 flex items-center justify-between">
         {/* Brand Zone */}
         <button
           onClick={() => handleNavClick('/')}
@@ -129,7 +129,7 @@ export const Navigation: React.FC<NavigationProps> = ({
 
         {/* Primary Navigation Destinations: Home / Projects / About / Philosophy / Contact */}
         <nav
-          className="hidden md:flex items-center gap-8 lg:gap-10 text-[13px] tracking-[0.14em] uppercase font-medium"
+          className="hidden lg:flex items-center gap-5 xl:gap-10 text-[13px] tracking-[0.14em] uppercase font-medium"
           aria-label="Primary Navigation"
         >
           <button
@@ -175,10 +175,10 @@ export const Navigation: React.FC<NavigationProps> = ({
         </nav>
 
         {/* Action: Rounded "Enquire" button */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <button
-            onClick={onOpenEnquiry}
-            className={`text-xs md:text-sm tracking-[0.14em] uppercase font-medium px-6 py-3 rounded-full transition-all duration-200 min-h-[48px] inline-flex items-center justify-center border shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-current ${theme.button}`}
+            onClick={() => { setMobileMenuOpen(false); onOpenEnquiry(); }}
+            className={`text-xs md:text-sm tracking-[0.14em] uppercase font-medium px-4 sm:px-6 py-3 rounded-full transition-all duration-200 min-h-[48px] inline-flex items-center justify-center border shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-current ${theme.button}`}
           >
             Enquire
           </button>
@@ -186,9 +186,10 @@ export const Navigation: React.FC<NavigationProps> = ({
           {/* Mobile Menu Toggle (Circular) */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden w-12 h-12 rounded-full flex flex-col justify-center items-center gap-1.5 focus:outline-none border border-current/20"
+            className="lg:hidden w-12 h-12 rounded-full flex flex-col justify-center items-center gap-1.5 focus:outline-none border border-current/20"
             aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             <span
               className={`w-5 h-0.5 transition-all duration-300 ${
@@ -212,7 +213,8 @@ export const Navigation: React.FC<NavigationProps> = ({
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div
-          className={`md:hidden px-6 py-8 border-b flex flex-col gap-5 animate-in fade-in duration-200 ${theme.mobileMenuBg}`}
+          id="mobile-navigation"
+          className={`lg:hidden max-h-[calc(100dvh-5rem)] overflow-y-auto px-6 py-5 border-b flex flex-col gap-5 animate-in fade-in duration-200 ${theme.mobileMenuBg}`}
         >
           <button
             onClick={() => handleNavClick('/')}

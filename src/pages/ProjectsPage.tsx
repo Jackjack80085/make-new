@@ -108,7 +108,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
       <header className="relative z-10 pt-32 sm:pt-36 pb-16 sm:pb-20 border-b border-[#242D36]/12 max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <div className="flex items-center justify-end gap-4 mb-8">
           {/* Quick Filter Switchers */}
-          <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#242D36]/5 border border-[#242D36]/10 text-xs font-accent tracking-wider uppercase">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 p-1 rounded-full bg-[#242D36]/5 border border-[#242D36]/10 text-xs font-accent tracking-wider uppercase">
             <button
               onClick={() => setActiveFilter('all')}
               className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
@@ -353,7 +353,7 @@ const ProjectShowcaseBlock: React.FC<{
             {project.essence}
           </p>
 
-          <div className="pt-2 flex items-center gap-3">
+          <div className="pt-2 flex flex-wrap items-center gap-3">
             <button
               onClick={onExploreProject}
               className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#59212C] text-[#E0D9C9] hover:bg-[#431821] text-xs font-accent uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer shadow-xs"

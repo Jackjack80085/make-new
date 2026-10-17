@@ -264,7 +264,7 @@ export default function App() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="w-full h-screen overflow-hidden"
+              className="w-full lg:h-dvh lg:overflow-hidden"
             >
               <AboutPage
                 onNavigateHome={() => navigateTo('/')}

@@ -265,7 +265,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
       {/* Main Snap Scroll Container */}
       <main
         ref={containerRef}
-        className="h-screen w-full overflow-y-auto snap-y snap-mandatory scroll-smooth focus:outline-none"
+        className="about-scroll w-full lg:h-dvh lg:overflow-y-auto lg:snap-y lg:snap-mandatory scroll-smooth focus:outline-none"
         tabIndex={0}
       >
         {/* ========================================================================= */}
@@ -276,7 +276,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         {/* ========================================================================= */}
         <section
           id="section-hero"
-          className="relative min-h-screen w-full snap-start snap-always flex flex-col justify-between px-6 md:px-16 lg:px-24 pt-32 pb-12 bg-[#E0D9C9] text-[#242D36] border-b border-[#242D36]/15 overflow-hidden"
+          className="relative min-h-svh w-full lg:snap-start lg:snap-always flex flex-col justify-between px-6 md:px-16 lg:px-24 pt-32 pb-12 bg-[#E0D9C9] text-[#242D36] border-b border-[#242D36]/15 overflow-hidden"
         >
           {/* Layer 1: Tactile Limestone Paper / Grain Texture via SVG filter */}
           <div
@@ -349,7 +349,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           </div>
 
           {/* Central Editorial Statement in Brand Typography & Colors */}
-          <div className="relative z-10 my-auto max-w-4xl space-y-6">
+          <div className="relative z-10 my-auto py-10 max-w-4xl space-y-6">
             <span className="inline-block text-xs font-accent tracking-[0.3em] uppercase text-[#59212C] font-semibold">
               Three Builders · One Standard
             </span>
@@ -393,7 +393,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         {/* ========================================================================= */}
         <section
           id="section-founders"
-          className="relative min-h-screen w-full snap-start snap-always flex flex-col justify-center pt-24 pb-12 bg-[#12161B] overflow-hidden border-b border-[#E0D9C9]/10"
+          className="relative min-h-svh w-full lg:snap-start lg:snap-always flex flex-col justify-center pt-24 pb-12 bg-[#12161B] overflow-hidden border-b border-[#E0D9C9]/10"
         >
           {/* Header Bar */}
           <div className="px-6 md:px-16 lg:px-24 mb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -417,7 +417,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                     activeFounderIndex > 0 && scrollToFounder(activeFounderIndex - 1)
                   }
                   disabled={activeFounderIndex === 0}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all ${
+                  className={`w-11 h-11 rounded-full flex items-center justify-center border transition-all ${
                     activeFounderIndex === 0
                       ? 'opacity-20 border-[#E0D9C9]/10 text-[#E0D9C9]'
                       : 'border-[#E0D9C9]/25 hover:border-[#E0D9C9] bg-[#161B21]'
@@ -432,7 +432,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                     scrollToFounder(activeFounderIndex + 1)
                   }
                   disabled={activeFounderIndex === chronicleStages.length - 1}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all ${
+                  className={`w-11 h-11 rounded-full flex items-center justify-center border transition-all ${
                     activeFounderIndex === chronicleStages.length - 1
                       ? 'opacity-20 border-[#E0D9C9]/10 text-[#E0D9C9]'
                       : 'border-[#E0D9C9]/25 hover:border-[#E0D9C9] bg-[#161B21]'
@@ -476,9 +476,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               >
                 <div className="space-y-5">
                   {/* Card Header Stamp */}
-                  <div className="flex items-center justify-between text-xs font-accent tracking-widest uppercase text-[#E0D9C9]/50 border-b border-[#E0D9C9]/10 pb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-accent tracking-widest uppercase text-[#E0D9C9]/50 border-b border-[#E0D9C9]/10 pb-3">
                     <span className="text-[#59212C] font-semibold">{stage.num} // {stage.stage}</span>
-                    <span className="text-right">{stage.tag}</span>
+                    <span className="sm:text-right">{stage.tag}</span>
                   </div>
 
                   {/* Clean Visual Frame */}
@@ -489,7 +489,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                       className="w-full h-full object-cover filter contrast-[1.05] grayscale-[10%] group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#161B21]/80 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-4 text-xs font-accent uppercase tracking-widest text-[#E0D9C9]/90">
+                    <div className="absolute bottom-3 left-4 right-4 text-[10px] sm:text-xs font-accent uppercase tracking-widest text-[#E0D9C9]/90">
                       {stage.overlayLabel}
                     </div>
                   </div>
@@ -509,7 +509,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 </div>
 
                 {/* Bottom Metric Stamp */}
-                <div className="pt-4 mt-4 border-t border-[#E0D9C9]/10 flex items-center justify-between text-xs font-accent tracking-wider uppercase text-[#E0D9C9]/60">
+                <div className="pt-4 mt-4 border-t border-[#E0D9C9]/10 flex flex-wrap items-center justify-between gap-2 text-xs font-accent tracking-wider uppercase text-[#E0D9C9]/60">
                   <span className="text-[#E0D9C9]/90 font-medium">{stage.metric}</span>
                   <span className="text-[#59212C]">0{idx + 1} / 0{chronicleStages.length}</span>
                 </div>
@@ -518,7 +518,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           </div>
 
           {/* Quiet Sideways Scroll Cue */}
-          <div className="px-6 md:px-16 lg:px-24 mt-4 flex items-center justify-between text-[11px] font-accent tracking-widest uppercase text-[#E0D9C9]/40">
+          <div className="px-6 md:px-16 lg:px-24 mt-4 flex flex-wrap items-center justify-between gap-3 text-[11px] font-accent tracking-widest uppercase text-[#E0D9C9]/40">
             <div className="flex items-center gap-2">
               <MoveHorizontal className="w-3.5 h-3.5 text-[#E0D9C9]/60 animate-pulse" />
               <span>Slide horizontally to trace the brand&apos;s evolution</span>
@@ -532,7 +532,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         {/* ========================================================================= */}
         <section
           id="section-dialogue"
-          className="relative min-h-screen w-full snap-start snap-always flex items-center justify-center px-6 md:px-16 lg:px-24 py-24 bg-gradient-to-b from-[#250F14] via-[#170A0D] to-[#0F1216] overflow-hidden"
+          className="relative min-h-svh w-full lg:snap-start lg:snap-always flex items-center justify-center px-6 md:px-16 lg:px-24 py-24 bg-gradient-to-b from-[#250F14] via-[#170A0D] to-[#0F1216] overflow-hidden"
         >
           {/* Faint emblem */}
           <div className="absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 w-[400px] h-[400px] opacity-[0.04] pointer-events-none">
