@@ -264,7 +264,7 @@ export default function App() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="w-full"
+              className="w-full lg:h-dvh lg:overflow-hidden"
             >
               <AboutPage
                 onNavigateHome={() => navigateTo('/')}
@@ -307,7 +307,7 @@ export default function App() {
       </main>
 
       {/* Brand Footer (omitted on full-viewport scroll-snapped About page which has its own integrated covenant plinth) */}
-      <Footer onNavigate={navigateTo} />
+      {currentRoute !== '/about' && <Footer onNavigate={navigateTo} />}
 
       {/* Direct Enquiry Side Panel */}
       <EnquiryDrawer

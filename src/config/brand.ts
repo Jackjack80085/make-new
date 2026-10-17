@@ -40,7 +40,7 @@ export const BRAND_CONFIG = {
     email: 'hello@makedevelopers.com',
     location: 'Indiranagar, Bangalore',
     hours: 'Monday – Saturday, 9:30 AM — 6:30 PM',
-    note: 'We read every message and we write back personally. Just say hello.',
+    note: 'We read every message and write back personally. Just say hello.',
   },
 
   // Verified projects (no invented square footage, prices, or speculative claims)
@@ -75,7 +75,7 @@ export const BRAND_CONFIG = {
   about: {
     founders: ['Gautham', 'Anish', 'Sidharth'],
     story:
-      'We started this because we felt something was missing in the way homes were being built. Not ambition, not scale — just genuine care for the person who was going to live there.\n\nSo that is what we try to bring to every project. We think about how a space will actually be used. We ask questions that slow us down a little. We pay attention to the details that most people will never consciously notice — but will feel every single day.',
+      'We started MAKE because we felt something was missing in the way homes were being built. Not ambition or scale, but genuine care for the person who would live there.\n\nThat is what we try to bring to every project. We think about how a space will be used, ask questions that make us look again, and pay attention to details people may never consciously notice, but feel every day.',
     foundersNote:
       '“We looked at what was being built and knew something was missing. Not scale, not ambition — just care. So we decided to build it ourselves.”',
     foundersAttribution: 'Gautham, Anish & Sidharth',
@@ -87,19 +87,19 @@ export const BRAND_CONFIG = {
       number: '01',
       title: 'Inside Out',
       description:
-        'We always start with the same question: what is it actually like to live here? Not how it photographs — how it feels on an ordinary Tuesday. The plan follows the life. Always.',
+        'We begin with how a home feels on an ordinary Tuesday. The plan follows the life.',
     },
     {
       number: '02',
       title: 'Nothing Without Purpose',
       description:
-        'Everything in our homes is there for a reason. If a detail does not make the space better to live in, it does not belong. Simple as that.',
+        'Every detail should make a space better to live in. If it does not, it does not belong.',
     },
     {
       number: '03',
       title: 'Quietly Considered',
       description:
-        'We are not trying to impress you loudly. We would rather you move in and slowly start to notice — a window placed just right, a space that just works. That is the standard we hold ourselves to.',
+        'A window placed just right. A corner that works. Details you notice slowly, once life settles in.',
     },
   ],
 
