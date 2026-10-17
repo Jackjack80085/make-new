@@ -1,3 +1,4 @@
+import { getScrollBehavior } from '../utils/scroll';
 import React from 'react';
 import { MakeLogo } from './MakeLogo';
 import { ArrowUp } from 'lucide-react';
@@ -9,19 +10,23 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onExploreSection }) => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: getScrollBehavior() });
   };
 
   const handleIndexClick = (id: string) => {
+    if (onExploreSection) {
+      onExploreSection(id);
+      return;
+    }
     if (window.location.pathname !== '/') {
       onNavigate('/');
       setTimeout(() => {
         const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        if (el) el.scrollIntoView({ behavior: getScrollBehavior() });
       }, 150);
     } else {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) el.scrollIntoView({ behavior: getScrollBehavior() });
     }
   };
 

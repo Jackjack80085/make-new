@@ -203,7 +203,7 @@
 
 /* Keep narrow grid/flex children and long contact details within their columns. */
 @layer base {
-  html { scroll-padding-top: 5rem; }
+  html { scroll-padding-top: 5rem; scroll-behavior: smooth; }
   img { max-width: 100%; }
   main, section, form, .grid > *, .flex > * { min-width: 0; }
   p, h1, h2, h3, a { overflow-wrap: anywhere; }
@@ -219,4 +219,11 @@
   input:not([type="checkbox"]), select, textarea { font-size: 16px; }
   [role="dialog"] { overscroll-behavior: contain; }
   #site-footer button, #site-footer a { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+/* Match fixed-header clearance in the About page's own scroll container. */
+.about-scroll { scroll-padding-top: 5rem; }
+@media (prefers-reduced-motion: reduce) {
+  html, .about-scroll { scroll-behavior: auto !important; }
+  .about-scroll, .about-scroll .snap-x { scroll-snap-type: none !important; }
 }

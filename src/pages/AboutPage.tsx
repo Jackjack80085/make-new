@@ -1,3 +1,4 @@
+import { getScrollBehavior } from '../utils/scroll';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'motion/react';
 import {
@@ -57,7 +58,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
     if (!containerRef.current) return;
     const target = document.getElementById(`section-${CHAPTERS[index].id}`);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
     }
   }, []);
 
@@ -123,27 +124,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({
     return () => el.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Translate vertical wheel into horizontal glide inside the founders section
-  useEffect(() => {
-    const el = horizontalScrollRef.current;
-    if (!el) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        const canScrollRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 10;
-        const canScrollLeft = el.scrollLeft > 10;
-
-        if ((e.deltaY > 0 && canScrollRight) || (e.deltaY < 0 && canScrollLeft)) {
-          e.preventDefault();
-          el.scrollBy({ left: e.deltaY * 1.3, behavior: 'auto' });
-        }
-      }
-    };
-
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => el.removeEventListener('wheel', handleWheel);
-  }, []);
-
   // Programmatic slide to specific founder
   const scrollToFounder = (index: number) => {
     const el = horizontalScrollRef.current;
@@ -153,7 +133,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
       const target = cards[index] as HTMLElement;
       el.scrollTo({
         left: target.offsetLeft - (el.clientWidth - target.offsetWidth) / 2,
-        behavior: 'smooth',
+        behavior: getScrollBehavior(),
       });
     }
   };
@@ -171,7 +151,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
     e.preventDefault();
     const x = e.pageX - horizontalScrollRef.current.offsetLeft;
     const walk = (x - startX) * 1.5;
-    horizontalScrollRef.current.scrollLeft = initialScrollLeft - walk;
+    horizontalScrollRef.current.scrollTo({ left: initialScrollLeft - walk, behavior: 'instant' });
   };
 
   const handleMouseUp = () => setIsDragging(false);
@@ -179,7 +159,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
+      if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'A'].includes((e.target as HTMLElement)?.tagName)) return;
 
       if (e.key === 'ArrowDown' || e.key === 'PageDown') {
         if (activeChapter < CHAPTERS.length - 1) {
@@ -265,7 +245,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
       {/* Main Snap Scroll Container */}
       <main
         ref={containerRef}
-        className="about-scroll w-full lg:h-dvh lg:overflow-y-auto lg:snap-y lg:snap-mandatory scroll-smooth focus:outline-none"
+        className="about-scroll w-full lg:h-dvh lg:overflow-y-auto lg:snap-y lg:snap-proximity scroll-smooth focus:outline-none"
         tabIndex={0}
       >
         {/* ========================================================================= */}
@@ -276,7 +256,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         {/* ========================================================================= */}
         <section
           id="section-hero"
-          className="relative min-h-svh w-full lg:snap-start lg:snap-always flex flex-col justify-between px-6 md:px-16 lg:px-24 pt-32 pb-12 bg-[#E0D9C9] text-[#242D36] border-b border-[#242D36]/15 overflow-hidden"
+          className="relative min-h-svh w-full lg:snap-start lg:snap-normal flex flex-col justify-between px-6 md:px-16 lg:px-24 pt-32 pb-12 bg-[#E0D9C9] text-[#242D36] border-b border-[#242D36]/15 overflow-hidden"
         >
           {/* Layer 1: Tactile Limestone Paper / Grain Texture via SVG filter */}
           <div
@@ -393,7 +373,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         {/* ========================================================================= */}
         <section
           id="section-founders"
-          className="relative min-h-svh w-full lg:snap-start lg:snap-always flex flex-col justify-center pt-24 pb-12 bg-[#12161B] overflow-hidden border-b border-[#E0D9C9]/10"
+          className="relative min-h-svh w-full lg:snap-start lg:snap-normal flex flex-col justify-center pt-24 pb-12 bg-[#12161B] overflow-hidden border-b border-[#E0D9C9]/10"
         >
           {/* Header Bar */}
           <div className="px-6 md:px-16 lg:px-24 mb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -464,7 +444,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
-            className={`w-full flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-16 lg:px-24 py-2 select-none ${
+            className={`w-full flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-proximity scroll-smooth px-6 md:px-16 lg:px-24 py-2 select-none ${
               isDragging ? 'cursor-grabbing' : 'cursor-grab'
             } [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden`}
           >
@@ -532,7 +512,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         {/* ========================================================================= */}
         <section
           id="section-dialogue"
-          className="relative min-h-svh w-full lg:snap-start lg:snap-always flex items-center justify-center px-6 md:px-16 lg:px-24 py-24 bg-gradient-to-b from-[#250F14] via-[#170A0D] to-[#0F1216] overflow-hidden"
+          className="relative min-h-svh w-full lg:snap-start lg:snap-normal flex items-center justify-center px-6 md:px-16 lg:px-24 py-24 bg-gradient-to-b from-[#250F14] via-[#170A0D] to-[#0F1216] overflow-hidden"
         >
           {/* Faint emblem */}
           <div className="absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 w-[400px] h-[400px] opacity-[0.04] pointer-events-none">

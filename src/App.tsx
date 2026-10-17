@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { getScrollBehavior } from './utils/scroll';
+import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Navigation } from './components/Navigation';
 import { Chapter1FirstLight } from './components/Chapter1FirstLight';
@@ -42,13 +43,20 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  const pendingSection = useRef<string | null>(null);
+  const handlePageReady = () => {
+    if (pendingSection.current) {
+      document.getElementById(pendingSection.current)?.scrollIntoView({ behavior: getScrollBehavior() });
+      pendingSection.current = null;
+    }
+  };
+
   const navigateTo = (route: string) => {
     if (route !== currentRoute) {
       setCurrentRoute(route);
       window.history.pushState({}, '', route);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (route === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: getScrollBehavior() });
     }
   };
 
@@ -177,17 +185,12 @@ export default function App() {
   const scrollToSection = (id: string) => {
     if (currentRoute !== '/') {
       navigateTo('/');
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+      pendingSection.current = id;
       return;
     }
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: getScrollBehavior() });
     }
   };
 
@@ -203,9 +206,10 @@ export default function App() {
 
       {/* Main Content with short fade transitions */}
       <main className="flex-1 w-full flex flex-col">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
           {currentRoute === '/' && (
             <motion.div
+              onAnimationComplete={handlePageReady}
               key="home"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -307,7 +311,7 @@ export default function App() {
       </main>
 
       {/* Brand Footer (omitted on full-viewport scroll-snapped About page which has its own integrated covenant plinth) */}
-      {currentRoute !== '/about' && <Footer onNavigate={navigateTo} />}
+      {currentRoute !== '/about' && <Footer onNavigate={navigateTo} onExploreSection={scrollToSection} />}
 
       {/* Direct Enquiry Side Panel */}
       <EnquiryDrawer
