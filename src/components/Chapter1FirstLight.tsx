@@ -1,3 +1,4 @@
+import heroSunlitHome from '../assets/images/hero_sunlit_home_1791013817349.jpg';
 import React from 'react';
 import { motion } from 'motion/react';
 
@@ -140,7 +141,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
       {/* Background Cinematic Photo with Settle Motion */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.img
-          src="/src/assets/images/hero_sunlit_home_1791013817349.jpg"
+          src={heroSunlitHome}
           alt="Sunlight pouring across a quiet living space with billowing linen curtains"
           referrerPolicy="no-referrer"
           initial={{ scale: 1.04, opacity: 0.94 }}

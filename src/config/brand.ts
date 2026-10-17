@@ -1,3 +1,6 @@
+import heroSunlitHome from '../assets/images/hero_sunlit_home_1791013817349.jpg';
+import architecturalResidence from '../assets/images/architectural_residence_1791013875636.jpg';
+
 /**
  * MAKE Developers - Central Brand Configuration & Verified Data Register
  * 
@@ -54,7 +57,7 @@ export const BRAND_CONFIG = {
       summary: 'Homes that feel like home from the first day.',
       description:
         'A residential community shaped around the natural pace of everyday life. Generous domestic spaces, daylight calibrated through the seasons, and thoughtful transitions between shared gardens and private hearths.',
-      image: '/src/assets/images/architectural_residence_1791013875636.jpg',
+      image: architecturalResidence,
       alt: 'Architectural study of Make Sampigehalli with courtyards and natural daylight in North Bengaluru',
     },
     {
@@ -66,7 +69,7 @@ export const BRAND_CONFIG = {
       summary: 'Where it began. Completed and handed over.',
       description:
         'The foundational MAKE project where our principles were first built into stone, timber, and everyday domestic routines. Thought through from the inside out and now home to its residents.',
-      image: '/src/assets/images/hero_sunlit_home_1791013817349.jpg',
+      image: heroSunlitHome,
       alt: 'Completed Make Borough residence showing honest materials and tranquil living spaces',
     },
   ],
