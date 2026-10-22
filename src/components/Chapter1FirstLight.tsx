@@ -41,14 +41,27 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
 
         {/* Reference Butterfly & Subtle Ambient Motes */}
         <div className="absolute inset-0 pointer-events-none z-15 overflow-hidden">
-          {/* One reference butterfly follows a full-width flight path. */}
+          {/* One articulated butterfly: wings hinge independently around the thorax. */}
           <div className="hero-butterfly-flight" aria-hidden="true">
-            <img
-              src="/hero-butterfly.png"
-              alt=""
-              className="hero-butterfly-wings"
-              draggable={false}
-            />
+            <div className="hero-butterfly-bank">
+              <div className="hero-butterfly-anatomy">
+                {['left', 'right'].map(side => (
+                  <div key={side} className={`hero-butterfly-wing hero-butterfly-wing-${side}`}>
+                    <svg viewBox="0 0 40 64" fill="none">
+                      <path d="M2 33C5 20 14 2 26 3C37 4 40 15 34 26C31 32 25 35 21 37C32 35 38 42 35 51C32 62 19 63 11 54C6 49 3 42 2 33Z" fill={`url(#wing-cream-${side})`} />
+                      <path d="M3 34C13 27 23 14 27 7M3 35C17 33 27 27 33 19M4 37C15 41 24 46 31 53M5 39C11 48 16 54 22 57" stroke="#b9ac8e" strokeWidth=".6" opacity=".45" />
+                      <defs><linearGradient id={`wing-cream-${side}`} x1="2" y1="34" x2="37" y2="25"><stop stopColor="#c8b995"/><stop offset=".35" stopColor="#e0d9c9"/><stop offset="1" stopColor="#f5efdf"/></linearGradient></defs>
+                    </svg>
+                  </div>
+                ))}
+                <svg className="hero-butterfly-body" viewBox="0 0 16 64" fill="none">
+                  <path d="M6 21C5 16 2 12 1 10M10 21C11 16 14 12 15 10" stroke="#d9cdb3" strokeWidth="1" strokeLinecap="round" />
+                  <ellipse cx="8" cy="23" rx="2.4" ry="3" fill="#c9b997"/>
+                  <ellipse cx="8" cy="30" rx="2.8" ry="5" fill="#d9cdb3"/>
+                  <path d="M6 33Q3 42 8 52Q13 42 10 33Z" fill="#c5b58f"/>
+                </svg>
+              </div>
+            </div>
           </div>
 
           {/* Subdued Low-Brightness Morning Light Motes (Reduced Glow & Brightness) */}
