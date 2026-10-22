@@ -41,24 +41,10 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
 
         {/* Reference Butterfly & Subtle Ambient Motes */}
         <div className="absolute inset-0 pointer-events-none z-15 overflow-hidden">
-          {/* One articulated butterfly: wings hinge independently around the thorax. */}
+          {/* One supplied animated SVG, retaining its original artwork and angle. */}
           <div className="hero-butterfly-flight" aria-hidden="true">
             <div className="hero-butterfly-bank">
-              <div className="hero-butterfly-anatomy">
-                {['left', 'right'].map(side => (
-                  <div key={side} className={`hero-butterfly-wing hero-butterfly-wing-${side}`}>
-                    <svg viewBox="0 0 40 64" fill="none">
-                      <path d="M2 36C3 23 10 2 19 2C27 2 29 17 27 26C26 30 24 33 22 35C31 31 38 37 37 45C36 56 25 61 17 56C8 51 4 43 2 36Z" fill="#E0D9C9" />
-                    </svg>
-                  </div>
-                ))}
-                <svg className="hero-butterfly-body" viewBox="0 0 16 64" fill="none">
-                  <path d="M6 21C5 16 2 12 1 10M10 21C11 16 14 12 15 10" stroke="#d9cdb3" strokeWidth="1" strokeLinecap="round" />
-                  <ellipse cx="8" cy="23" rx="2.4" ry="3" fill="#c9b997"/>
-                  <ellipse cx="8" cy="30" rx="2.8" ry="5" fill="#d9cdb3"/>
-                  <path d="M6 33Q3 42 8 52Q13 42 10 33Z" fill="#c5b58f"/>
-                </svg>
-              </div>
+              <img src="/hero-butterfly.svg" className="hero-butterfly-artwork" alt="" draggable={false} />
             </div>
           </div>
 
