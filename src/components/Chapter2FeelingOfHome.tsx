@@ -7,13 +7,7 @@ import domesticDetailReading from '../assets/images/domestic_detail_reading_1791
 import morningRitualBreakfast from '../assets/images/morning_ritual_breakfast_1791013841349.jpg';
 import connectionLivingTerrace from '../assets/images/connection_living_terrace_1791013851990.jpg';
 
-interface Chapter2Props {
-  onNavigatePhilosophy?: () => void;
-  onNavigateProjects?: () => void;
-  onNavigateAbout?: () => void;
-}
-
-export const Chapter2FeelingOfHome: React.FC<Chapter2Props> = () => {
+export const Chapter2FeelingOfHome: React.FC = () => {
   const [activeLens, setActiveLens] = useState(0);
 
   const perspectives = [

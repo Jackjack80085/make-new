@@ -11,16 +11,14 @@ import { Footer } from './components/Footer';
 import { EnquiryDrawer } from './components/EnquiryDrawer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectsPage } from './pages/ProjectsPage';
-import { AboutPage } from './pages/AboutPage';
-import { PhilosophyPage } from './pages/PhilosophyPage';
-import { ContactPage } from './pages/ContactPage';
 import { ProjectData } from './config/brand';
 
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname;
-      if (['/projects', '/about', '/philosophy', '/contact'].includes(path)) {
+      if (['/about', '/philosophy', '/contact'].includes(path)) window.history.replaceState({}, '', '/');
+      if (['/projects'].includes(path)) {
         return path;
       }
     }
@@ -36,7 +34,7 @@ export default function App() {
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname;
-      setCurrentRoute(['/projects', '/about', '/philosophy', '/contact'].includes(path) ? path : '/');
+      setCurrentRoute(['/projects'].includes(path) ? path : '/');
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -223,10 +221,7 @@ export default function App() {
               />
 
               {/* Chapter 2: The Feeling of Home */}
-              <Chapter2FeelingOfHome
-                onNavigatePhilosophy={() => navigateTo('/philosophy')}
-                onNavigateAbout={() => navigateTo('/about')}
-              />
+              <Chapter2FeelingOfHome />
 
               {/* Chapter 3: Life Happens Here */}
               <Chapter3LifeHappensHere
@@ -261,64 +256,16 @@ export default function App() {
             </motion.div>
           )}
 
-          {currentRoute === '/about' && (
-            <motion.div
-              key="about"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="w-full lg:h-dvh lg:overflow-hidden"
-            >
-              <AboutPage
-                onNavigateHome={() => navigateTo('/')}
-                onOpenEnquiry={() => handleOpenEnquiry()}
-                onNavigateProjects={() => navigateTo('/projects')}
-              />
-            </motion.div>
-          )}
-
-          {currentRoute === '/philosophy' && (
-            <motion.div
-              key="philosophy"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <PhilosophyPage
-                onNavigateHome={() => navigateTo('/')}
-                onOpenEnquiry={() => handleOpenEnquiry()}
-                onNavigateProjects={() => navigateTo('/projects')}
-              />
-            </motion.div>
-          )}
-
-          {currentRoute === '/contact' && (
-            <motion.div
-              key="contact"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <ContactPage
-                onNavigateHome={() => navigateTo('/')}
-              />
-            </motion.div>
-          )}
         </AnimatePresence>
       </main>
 
-      {/* Brand Footer (omitted on full-viewport scroll-snapped About page which has its own integrated covenant plinth) */}
-      {currentRoute !== '/about' && <Footer onNavigate={navigateTo} onExploreSection={scrollToSection} />}
+      <Footer onNavigate={navigateTo} onExploreSection={scrollToSection} />
 
       {/* Direct Enquiry Side Panel */}
       <EnquiryDrawer
         isOpen={isEnquiryOpen}
         onClose={handleCloseEnquiry}
         initialProject={selectedProjectForEnquiry}
-        onNavigateContact={() => navigateTo('/contact')}
       />
 
       {/* Simplified Project Overview Modal */}

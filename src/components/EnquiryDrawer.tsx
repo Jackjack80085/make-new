@@ -7,14 +7,12 @@ interface EnquiryDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   initialProject?: string;
-  onNavigateContact?: () => void;
 }
 
 export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
   isOpen,
   onClose,
   initialProject = '',
-  onNavigateContact,
 }) => {
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
@@ -328,21 +326,6 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
                     </button>
                   </div>
 
-                  {/* Dedicated Contact Page Link */}
-                  {onNavigateContact && (
-                    <div className="text-center pt-2">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleClose();
-                          onNavigateContact();
-                        }}
-                        className="text-xs text-[#59212C] underline hover:text-[#242D36] transition-colors"
-                      >
-                        Visit full contact page
-                      </button>
-                    </div>
-                  )}
                 </form>
               )}
             </div>

@@ -28,19 +28,6 @@ export const Navigation: React.FC<NavigationProps> = ({
 
   // Section Color Configurations when on Home page ('/')
   const getHeaderTheme = () => {
-    if (currentRoute === '/about') {
-      return {
-        bg: 'bg-[#E0D9C9]/95 backdrop-blur-md border-b border-[#242D36]/15',
-        text: 'text-[#242D36]',
-        logoVariant: 'dark' as const,
-        underline: 'after:bg-[#59212C]',
-        activeIndicator: 'text-[#59212C] font-semibold',
-        button: 'bg-[#59212C] text-[#E0D9C9] hover:bg-[#6e2936] border-transparent',
-        mobileMenuBg: 'bg-[#E0D9C9] border-[#242D36]/15 text-[#242D36]',
-        mobileButton: 'bg-[#59212C] text-[#E0D9C9]',
-      };
-    }
-
     if (currentRoute !== '/') {
       return {
         bg: 'bg-[#E0D9C9]/95 backdrop-blur-md border-b border-[#242D36]/15',
@@ -127,7 +114,7 @@ export const Navigation: React.FC<NavigationProps> = ({
           <MakeLogo variant={theme.logoVariant} size="md" />
         </button>
 
-        {/* Primary Navigation Destinations: Home / Projects / About / Philosophy / Contact */}
+        {/* Primary Navigation Destinations: Our Way / Living */}
         <nav
           className="hidden lg:flex items-center gap-5 xl:gap-10 text-[13px] tracking-[0.14em] uppercase font-medium"
           aria-label="Primary Navigation"
@@ -138,7 +125,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               currentRoute === '/' ? theme.activeIndicator : 'opacity-75 hover:opacity-100'
             } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${theme.underline}`}
           >
-            Home
+            Our Way
           </button>
           <button
             onClick={() => handleNavClick('/projects')}
@@ -146,31 +133,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               currentRoute === '/projects' ? theme.activeIndicator : 'opacity-75 hover:opacity-100'
             } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${theme.underline}`}
           >
-            Projects
-          </button>
-          <button
-            onClick={() => handleNavClick('/about')}
-            className={`transition-colors duration-200 py-2 relative ${
-              currentRoute === '/about' ? theme.activeIndicator : 'opacity-75 hover:opacity-100'
-            } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${theme.underline}`}
-          >
-            About
-          </button>
-          <button
-            onClick={() => handleNavClick('/philosophy')}
-            className={`transition-colors duration-200 py-2 relative ${
-              currentRoute === '/philosophy' ? theme.activeIndicator : 'opacity-75 hover:opacity-100'
-            } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${theme.underline}`}
-          >
-            Philosophy
-          </button>
-          <button
-            onClick={() => handleNavClick('/contact')}
-            className={`transition-colors duration-200 py-2 relative ${
-              currentRoute === '/contact' ? theme.activeIndicator : 'opacity-75 hover:opacity-100'
-            } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${theme.underline}`}
-          >
-            Contact
+            Living
           </button>
         </nav>
 
@@ -220,31 +183,13 @@ export const Navigation: React.FC<NavigationProps> = ({
             onClick={() => handleNavClick('/')}
             className="text-left text-lg font-serif-display tracking-wide py-2 min-h-[44px]"
           >
-            Home
+            Our Way
           </button>
           <button
             onClick={() => handleNavClick('/projects')}
             className="text-left text-lg font-serif-display tracking-wide py-2 min-h-[44px]"
           >
-            Projects
-          </button>
-          <button
-            onClick={() => handleNavClick('/about')}
-            className="text-left text-lg font-serif-display tracking-wide py-2 min-h-[44px]"
-          >
-            About
-          </button>
-          <button
-            onClick={() => handleNavClick('/philosophy')}
-            className="text-left text-lg font-serif-display tracking-wide py-2 min-h-[44px]"
-          >
-            Philosophy
-          </button>
-          <button
-            onClick={() => handleNavClick('/contact')}
-            className="text-left text-lg font-serif-display tracking-wide py-2 min-h-[44px]"
-          >
-            Contact
+            Living
           </button>
           <button
             onClick={() => {
