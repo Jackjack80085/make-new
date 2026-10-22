@@ -6,131 +6,6 @@ interface Chapter1Props {
   onDiscoverClick: () => void;
 }
 
-/**
- * Realistic Butterfly Silhouette with Anatomical Forewings, Scalloped Hindwings,
- * Antennae with Tips, Slender Abdomen, and Delicate Internal Vein Contours.
- */
-const RealisticButterfly: React.FC<{
-  className?: string;
-  wingColor?: string;
-  bodyColor?: string;
-  wingSpan?: number;
-}> = ({
-  className = '',
-  wingColor = 'rgba(224, 217, 201, 0.72)',
-  bodyColor = '#242D36',
-}) => {
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
-    >
-      {/* LEFT WINGS GROUP */}
-      <motion.g
-        style={{ transformOrigin: '32px 32px' }}
-        animate={{ scaleX: [1, 0.35, 0.95, 0.4, 1] }}
-        transition={{ duration: 0.38, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        {/* Left Forewing Silhouette */}
-        <path
-          d="M31 29 C29 18 20 12 11 14 C7 15 5 19 8 23 C10 26 14 27 18 29 C24 32 29 33 31 33 Z"
-          fill={wingColor}
-        />
-        {/* Left Forewing Delicate Veins */}
-        <path
-          d="M31 30 C22 24 16 19 12 16 M23 25 C17 22 13 22 9 21 M27 28 C21 27 16 29 13 28"
-          stroke={bodyColor}
-          strokeWidth="0.4"
-          strokeOpacity="0.35"
-          strokeLinecap="round"
-        />
-
-        {/* Left Hindwing Silhouette (Scalloped Margin) */}
-        <path
-          d="M31 33 C26 34 18 37 16 42 C15 45 17 49 21 48 C24 47 26 44 28 42 C29 44 31 42 31 38 Z"
-          fill={wingColor}
-        />
-        {/* Left Hindwing Veins */}
-        <path
-          d="M31 35 C25 38 20 42 18 45 M28 39 C24 42 22 45 21 47"
-          stroke={bodyColor}
-          strokeWidth="0.35"
-          strokeOpacity="0.35"
-          strokeLinecap="round"
-        />
-      </motion.g>
-
-      {/* RIGHT WINGS GROUP */}
-      <motion.g
-        style={{ transformOrigin: '32px 32px' }}
-        animate={{ scaleX: [1, 0.35, 0.95, 0.4, 1] }}
-        transition={{ duration: 0.38, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        {/* Right Forewing Silhouette */}
-        <path
-          d="M33 29 C35 18 44 12 53 14 C57 15 59 19 56 23 C54 26 50 27 46 29 C40 32 35 33 33 33 Z"
-          fill={wingColor}
-        />
-        {/* Right Forewing Delicate Veins */}
-        <path
-          d="M33 30 C42 24 48 19 52 16 M41 25 C47 22 51 22 55 21 M37 28 C43 27 48 29 51 28"
-          stroke={bodyColor}
-          strokeWidth="0.4"
-          strokeOpacity="0.35"
-          strokeLinecap="round"
-        />
-
-        {/* Right Hindwing Silhouette (Scalloped Margin) */}
-        <path
-          d="M33 33 C38 34 46 37 48 42 C49 45 47 49 43 48 C40 47 38 44 36 42 C35 44 33 42 33 38 Z"
-          fill={wingColor}
-        />
-        {/* Right Hindwing Veins */}
-        <path
-          d="M33 35 C39 38 44 42 46 45 M36 39 C40 42 42 45 43 47"
-          stroke={bodyColor}
-          strokeWidth="0.35"
-          strokeOpacity="0.35"
-          strokeLinecap="round"
-        />
-      </motion.g>
-
-      {/* ANATOMICAL BUTTERFLY BODY (Head, Thorax, Segmented Abdomen) */}
-      <g fill={bodyColor}>
-        {/* Head */}
-        <ellipse cx="32" cy="22" rx="1.3" ry="1.4" />
-        {/* Thorax */}
-        <ellipse cx="32" cy="27" rx="1.6" ry="3.2" />
-        {/* Segmented Abdomen */}
-        <path
-          d="M32 31 C32.8 31 33.2 32.5 33.2 36 C33.2 39.5 32.7 43 32 44.5 C31.3 43 30.8 39.5 30.8 36 C30.8 32.5 31.2 31 32 31 Z"
-          opacity="0.95"
-        />
-      </g>
-
-      {/* ANTENNAE WITH DELICATE CLUBBED TIPS */}
-      <path
-        d="M31.2 21 C29 17 24 14 21 16"
-        stroke={bodyColor}
-        strokeWidth="0.75"
-        strokeLinecap="round"
-      />
-      <circle cx="20.8" cy="16.2" r="0.7" fill={bodyColor} />
-
-      <path
-        d="M32.8 21 C35 17 40 14 43 16"
-        stroke={bodyColor}
-        strokeWidth="0.75"
-        strokeLinecap="round"
-      />
-      <circle cx="43.2" cy="16.2" r="0.7" fill={bodyColor} />
-    </svg>
-  );
-};
-
 export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick }) => {
   return (
     <section
@@ -164,66 +39,17 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
           className="absolute -top-32 -left-20 w-[900px] h-[900px] pointer-events-none rounded-full blur-3xl opacity-15 bg-gradient-to-br from-amber-100/30 via-amber-200/10 to-transparent"
         />
 
-        {/* Realistic Butterflies & Subtle, Soft Ambient Sparkle Motes */}
+        {/* Reference Butterfly & Subtle Ambient Motes */}
         <div className="absolute inset-0 pointer-events-none z-15 overflow-hidden">
-          {/* Realistic Butterfly 1: Gentle Gliding Flight in Sunbeam */}
-          <motion.div
-            initial={{ opacity: 0, x: -10, y: 15 }}
-            animate={{
-              opacity: [0, 0.55, 0.7, 0.45, 0.65, 0.15],
-              x: [0, 40, 80, 130, 175],
-              y: [0, -18, -32, -22, -42],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              repeatType: 'reverse',
-              ease: 'easeInOut',
-            }}
-            className="absolute top-[28%] left-[26%] sm:left-[36%] w-10 h-10 pointer-events-none"
-          >
-            <motion.div
-              animate={{ rotate: [-5, 7, -3, 8, -5] }}
-              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-full h-full drop-shadow-[0_1px_4px_rgba(0,0,0,0.18)]"
-            >
-              <RealisticButterfly
-                className="w-full h-full"
-                wingColor="rgba(245, 239, 226, 0.78)"
-                bodyColor="#2B392C"
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Realistic Butterfly 2: Smaller, Distant Ambient Flight */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: [0, 0.4, 0.55, 0.3, 0.48, 0],
-              x: [0, -30, -55, -25, 12],
-              y: [0, -22, -14, -34, -18],
-            }}
-            transition={{
-              duration: 24,
-              repeat: Infinity,
-              delay: 3,
-              repeatType: 'mirror',
-              ease: 'easeInOut',
-            }}
-            className="absolute top-[42%] right-[26%] w-8 h-8 pointer-events-none"
-          >
-            <motion.div
-              animate={{ rotate: [6, -7, 5, -5, 6] }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-full h-full drop-shadow-[0_1px_3px_rgba(0,0,0,0.15)]"
-            >
-              <RealisticButterfly
-                className="w-full h-full"
-                wingColor="rgba(240, 234, 220, 0.68)"
-                bodyColor="#32281F"
-              />
-            </motion.div>
-          </motion.div>
+          {/* One reference butterfly follows a full-width flight path. */}
+          <div className="hero-butterfly-flight" aria-hidden="true">
+            <img
+              src="/hero-butterfly.png"
+              alt=""
+              className="hero-butterfly-wings"
+              draggable={false}
+            />
+          </div>
 
           {/* Subdued Low-Brightness Morning Light Motes (Reduced Glow & Brightness) */}
           <motion.div
