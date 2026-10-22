@@ -48,9 +48,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
                 {['left', 'right'].map(side => (
                   <div key={side} className={`hero-butterfly-wing hero-butterfly-wing-${side}`}>
                     <svg viewBox="0 0 40 64" fill="none">
-                      <path d="M2 33C5 20 14 2 26 3C37 4 40 15 34 26C31 32 25 35 21 37C32 35 38 42 35 51C32 62 19 63 11 54C6 49 3 42 2 33Z" fill={`url(#wing-cream-${side})`} />
-                      <path d="M3 34C13 27 23 14 27 7M3 35C17 33 27 27 33 19M4 37C15 41 24 46 31 53M5 39C11 48 16 54 22 57" stroke="#b9ac8e" strokeWidth=".6" opacity=".45" />
-                      <defs><linearGradient id={`wing-cream-${side}`} x1="2" y1="34" x2="37" y2="25"><stop stopColor="#c8b995"/><stop offset=".35" stopColor="#e0d9c9"/><stop offset="1" stopColor="#f5efdf"/></linearGradient></defs>
+                      <path d="M2 36C3 23 10 2 19 2C27 2 29 17 27 26C26 30 24 33 22 35C31 31 38 37 37 45C36 56 25 61 17 56C8 51 4 43 2 36Z" fill="#E0D9C9" />
                     </svg>
                   </div>
                 ))}
