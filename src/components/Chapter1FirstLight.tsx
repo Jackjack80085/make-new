@@ -1,3 +1,4 @@
+import { ButterflyFlight } from './ButterflyFlight';
 import heroSunlitHome from '../assets/images/hero_sunlit_home_1791013817349.jpg';
 import React from 'react';
 import { motion } from 'motion/react';
@@ -41,12 +42,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
 
         {/* Reference Butterfly & Subtle Ambient Motes */}
         <div className="absolute inset-0 pointer-events-none z-15 overflow-hidden">
-          {/* One supplied animated SVG, retaining its original artwork and angle. */}
-          <div className="hero-butterfly-flight" aria-hidden="true">
-            <div className="hero-butterfly-bank">
-              <img src="/hero-butterfly.svg" className="hero-butterfly-artwork" alt="" draggable={false} />
-            </div>
-          </div>
+          <ButterflyFlight />
 
           {/* Subdued Low-Brightness Morning Light Motes (Reduced Glow & Brightness) */}
           <motion.div
