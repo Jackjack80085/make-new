@@ -109,34 +109,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onExploreSection }) 
             </span>
             <div className="grid grid-cols-1 gap-1 text-[#242D36]/75">
               <button
-                onClick={() => handleIndexClick('the-first-light')}
+                onClick={() => handleIndexClick('home-design')}
                 className="text-left hover:text-[#59212C] transition-colors py-0.5"
               >
-                01 / The First Light
-              </button>
-              <button
-                onClick={() => handleIndexClick('the-feeling-of-home')}
-                className="text-left hover:text-[#59212C] transition-colors py-0.5"
-              >
-                02 / The Feeling of Home
-              </button>
-              <button
-                onClick={() => handleIndexClick('life-happens-here')}
-                className="text-left hover:text-[#59212C] transition-colors py-0.5"
-              >
-                03 / Life Happens Here
-              </button>
-              <button
-                onClick={() => handleIndexClick('a-place-to-belong')}
-                className="text-left hover:text-[#59212C] transition-colors py-0.5"
-              >
-                04 / A Place to Belong
-              </button>
-              <button
-                onClick={() => handleIndexClick('come-home')}
-                className="text-left hover:text-[#59212C] transition-colors py-0.5"
-              >
-                05 / Come Home
+                01 / Designed around you
               </button>
             </div>
           </div>

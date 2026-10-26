@@ -137,13 +137,13 @@ export const Navigation: React.FC<NavigationProps> = ({
           </button>
         </nav>
 
-        {/* Action: Rounded "Talk Now" button */}
+        {/* Action: Rounded enquiry button */}
         <div className="flex items-center gap-2 sm:gap-4">
           <button
             onClick={() => { setMobileMenuOpen(false); onOpenEnquiry(); }}
             className={`text-xs md:text-sm tracking-[0.14em] uppercase font-medium px-4 sm:px-6 py-3 rounded-full transition-all duration-200 min-h-[48px] inline-flex items-center justify-center border shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-current ${theme.button}`}
           >
-            Talk Now
+            Let’s Talk
           </button>
 
           {/* Mobile Menu Toggle (Circular) */}

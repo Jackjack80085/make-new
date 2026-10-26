@@ -1,5 +1,5 @@
 import { ButterflyFlight } from './ButterflyFlight';
-import heroSunlitHome from '../assets/images/hero_sunlit_home_1791013817349.jpg';
+import envisionedBespokeHome from '../assets/images/envisioned_bespoke_home_1792166097774.jpg';
 import React from 'react';
 import { motion } from 'motion/react';
 
@@ -17,13 +17,13 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
       {/* Background Cinematic Photo with Settle Motion */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.img
-          src={heroSunlitHome}
-          alt="Sunlight pouring across a quiet living space with billowing linen curtains"
+          src={envisionedBespokeHome}
+          alt="An apartment living room opening onto a lush private garden"
           referrerPolicy="no-referrer"
           initial={{ scale: 1.04, opacity: 0.94 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full h-full object-cover object-[65%_35%] md:object-center"
+          className="w-full h-full object-cover object-[65%_50%] md:object-center"
         />
 
         {/* Tactile Texture Overlay: Paper & Plaster grain */}
@@ -89,11 +89,9 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="text-[#E0D9C9] font-serif-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[1.05] font-normal mb-6 max-w-2xl"
-              style={{ textWrap: 'balance' }}
             >
-              Homes built
-              <br />
-              <span className="italic font-light">with care.</span>
+              <span className="block whitespace-nowrap">Made for the way</span>
+              <span className="block whitespace-nowrap italic font-light">you live.</span>
             </motion.h1>
 
             <motion.p
@@ -102,7 +100,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
               transition={{ duration: 0.75, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="text-[#E0D9C9]/90 text-[18px] md:text-xl font-light leading-relaxed tracking-wide max-w-lg mb-8"
             >
-              For everyday life, thought through from the inside out.
+              A home shaped around your rhythms, your rituals and all the little things that make it yours.
             </motion.p>
 
             {/* Contextual Hero CTA: "See our work" */}
@@ -116,7 +114,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
               className="group inline-flex items-center gap-3.5 bg-[#59212C] text-[#E0D9C9] px-8 py-3.5 text-xs md:text-sm tracking-[0.16em] uppercase font-medium transition-colors duration-200 min-h-[48px] rounded-full shadow-lg border border-[#E0D9C9]/10 relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E0D9C9]"
             >
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span>See our work</span>
+              <span>Make it yours</span>
               <svg
                 className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1"
                 fill="none"
@@ -131,7 +129,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
           {/* Right Column: Scroll line & chapter indicator */}
           <div className="lg:col-span-4 flex flex-col lg:items-end justify-end mt-6 lg:mt-0">
             <motion.a
-              href="#the-feeling-of-home"
+              href="#home-design"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.6 }}
@@ -140,10 +138,10 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
                 onDiscoverClick();
               }}
               className="group flex items-center lg:flex-col lg:items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#E0D9C9]/80 hover:text-[#E0D9C9] transition-colors py-2"
-              aria-label="Scroll to 02 / The Feeling of Home"
+              aria-label="Scroll to explore Make"
             >
               <span className="text-[11px] font-accent tracking-[0.22em] text-[#E0D9C9]/90 font-medium">
-                02 / THE FEELING OF HOME
+                DESIGNED AROUND YOU
               </span>
               <div className="w-12 lg:w-px h-px lg:h-20 bg-[#E0D9C9]/25 relative overflow-hidden">
                 <motion.div

@@ -213,7 +213,7 @@
   /* Stable hero height as mobile browser controls expand and collapse. */
   #the-first-light { min-height: 100svh; }
   #the-first-light > .relative { padding-top: 7rem; }
-  #the-first-light h1, #come-home h2 { font-size: clamp(2.5rem, 10.5vw, 3rem); }
+  #the-first-light h1 { font-size: clamp(1.75rem, 8.5vw, 3rem); }
 
   /* Avoid iOS zooming the page when focusing a form control. */
   input:not([type="checkbox"]), select, textarea { font-size: 16px; }

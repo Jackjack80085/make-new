@@ -3,15 +3,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Navigation } from './components/Navigation';
 import { Chapter1FirstLight } from './components/Chapter1FirstLight';
-import { Chapter2FeelingOfHome } from './components/Chapter2FeelingOfHome';
-import { Chapter3LifeHappensHere } from './components/Chapter3LifeHappensHere';
-import { Chapter4PlaceToBelong } from './components/Chapter4PlaceToBelong';
-import { Chapter5ComeHome } from './components/Chapter5ComeHome';
 import { Footer } from './components/Footer';
 import { EnquiryDrawer } from './components/EnquiryDrawer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ProjectData } from './config/brand';
+import { HomepageIndex } from './components/HomepageIndex';
 
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState<string>(() => {
@@ -145,10 +142,9 @@ export default function App() {
     const handleScroll = () => {
       const chapters = [
         { id: 'the-first-light', chapter: 1 },
-        { id: 'the-feeling-of-home', chapter: 2 },
-        { id: 'life-happens-here', chapter: 3 },
-        { id: 'a-place-to-belong', chapter: 4 },
-        { id: 'come-home', chapter: 5 },
+        { id: 'home-design', chapter: 2 },
+        { id: 'home-lifestyle', chapter: 3 },
+        { id: 'founders-note', chapter: 5 },
         { id: 'site-footer', chapter: 2 },
       ];
 
@@ -217,26 +213,11 @@ export default function App() {
             >
               {/* Chapter 1: The First Light */}
               <Chapter1FirstLight
-                onDiscoverClick={() => scrollToSection('the-feeling-of-home')}
+                onDiscoverClick={() => scrollToSection('home-design')}
               />
 
-              {/* Chapter 2: The Feeling of Home */}
-              <Chapter2FeelingOfHome />
-
-              {/* Chapter 3: Life Happens Here */}
-              <Chapter3LifeHappensHere
-                onDiscoverHomes={() => scrollToSection('a-place-to-belong')}
-              />
-
-              {/* Chapter 4: A Place to Belong (Our Work: Make Sampigehalli & Make Borough) */}
-              <Chapter4PlaceToBelong
-                onExploreProject={(project) => setActiveProjectModal(project)}
-              />
-
-              {/* Chapter 5: Come Home */}
-              <Chapter5ComeHome
-                onStartConversation={() => handleOpenEnquiry()}
-              />
+              {/* The only content section after the hero */}
+              <HomepageIndex />
             </motion.div>
           )}
 
