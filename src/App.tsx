@@ -213,7 +213,7 @@ export default function App() {
             >
               {/* Chapter 1: The First Light */}
               <Chapter1FirstLight
-                onDiscoverClick={() => scrollToSection('home-design')}
+                onDiscoverClick={() => scrollToSection('home-lifestyle')}
               />
 
               {/* The only content section after the hero */}
@@ -240,7 +240,7 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      <Footer onNavigate={navigateTo} onExploreSection={scrollToSection} />
+      <Footer onNavigate={navigateTo} onOpenEnquiry={() => handleOpenEnquiry()} />
 
       {/* Direct Enquiry Side Panel */}
       <EnquiryDrawer

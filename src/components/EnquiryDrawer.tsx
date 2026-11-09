@@ -15,7 +15,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
   initialProject = '',
 }) => {
   const [name, setName] = useState('');
-  const [contact, setContact] = useState('');
+  const [phone, setPhone] = useState('');
   const [projectPreference, setProjectPreference] = useState(initialProject);
   const [message, setMessage] = useState('');
   const [consent, setConsent] = useState(false);
@@ -93,8 +93,11 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
       newErrors.name = 'Please provide your name.';
     }
 
-    if (!contact.trim()) {
-      newErrors.contact = 'Please provide an email or telephone number.';
+    const phoneDigits = phone.replace(/\D/g, '');
+    if (!phone.trim()) {
+      newErrors.phone = 'Please provide your phone number.';
+    } else if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+      newErrors.phone = 'Please provide a valid phone number.';
     }
 
     if (!message.trim()) {
@@ -118,7 +121,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
 
   const handleReset = () => {
     setName('');
-    setContact('');
+    setPhone('');
     setMessage('');
     setConsent(false);
     setErrors({});
@@ -187,7 +190,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
                     Thank you, {name}.
                   </h3>
                   <p className="text-[18px] text-[#242D36]/80 font-light leading-relaxed mb-8">
-                    We read every message and write back personally. Our studio will reach out to you via {contact} soon.
+                    We read every message and write back personally. Our studio will reach out to you at {phone} soon.
                   </p>
 
                   <button
@@ -227,26 +230,28 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
                     )}
                   </div>
 
-                  {/* Email / Phone Field */}
+                  {/* Phone Number Field */}
                   <div className="space-y-1.5">
-                    <label htmlFor="enquiry-contact" className="block text-xs font-accent uppercase tracking-[0.14em] text-[#242D36]">
-                      Email or Phone <span className="text-[#59212C]">*</span>
+                    <label htmlFor="enquiry-phone" className="block text-xs font-accent uppercase tracking-[0.14em] text-[#242D36]">
+                      Phone Number <span className="text-[#59212C]">*</span>
                     </label>
                     <input
-                      id="enquiry-contact"
-                      type="text"
-                      value={contact}
+                      id="enquiry-phone"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      value={phone}
                       onChange={(e) => {
-                        setContact(e.target.value);
-                        if (errors.contact) setErrors((prev) => ({ ...prev, contact: '' }));
+                        setPhone(e.target.value);
+                        if (errors.phone) setErrors((prev) => ({ ...prev, phone: '' }));
                       }}
-                      placeholder="name@domain.com or +91 98450 00000"
+                      placeholder="+91 98450 00000"
                       className={`w-full bg-[#FFFFFF]/90 border ${
-                        errors.contact ? 'border-[#59212C] ring-1 ring-[#59212C]' : 'border-[#242D36]/25'
+                        errors.phone ? 'border-[#59212C] ring-1 ring-[#59212C]' : 'border-[#242D36]/25'
                       } rounded-[16px] px-4 py-3 text-sm text-[#242D36] placeholder-[#242D36]/40 focus:outline-none focus:border-[#59212C] focus:ring-1 focus:ring-[#59212C] transition-colors`}
                     />
-                    {errors.contact && (
-                      <p className="text-xs text-[#59212C] font-accent">{errors.contact}</p>
+                    {errors.phone && (
+                      <p className="text-xs text-[#59212C] font-accent">{errors.phone}</p>
                     )}
                   </div>
 
@@ -283,7 +288,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
                         setMessage(e.target.value);
                         if (errors.message) setErrors((prev) => ({ ...prev, message: '' }));
                       }}
-                      placeholder="Tell us what home means to you..."
+                      placeholder="Tell us what your ideal home is like....."
                       className={`w-full bg-[#FFFFFF]/90 border ${
                         errors.message ? 'border-[#59212C] ring-1 ring-[#59212C]' : 'border-[#242D36]/25'
                       } rounded-[16px] px-4 py-3 text-sm text-[#242D36] placeholder-[#242D36]/40 focus:outline-none focus:border-[#59212C] focus:ring-1 focus:ring-[#59212C] transition-colors`}
@@ -291,6 +296,9 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
                     {errors.message && (
                       <p className="text-xs text-[#59212C] font-accent">{errors.message}</p>
                     )}
+                    <p className="text-xs leading-relaxed text-[#242D36]/55">
+                      The more details, the better. Tell us as much as you can.
+                    </p>
                   </div>
 
                   {/* Consent and Privacy Checkbox */}
@@ -330,10 +338,6 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
               )}
             </div>
 
-            {/* Panel Footer */}
-            <div className="p-4 sm:p-6 md:p-8 shrink-0 bg-[#D8D0BF]/50 border-t border-[#242D36]/10 text-xs text-[#242D36]/70 leading-relaxed">
-              <span className="font-semibold text-[#59212C]">STUDIO DESK:</span> Indiranagar, Bangalore · {BRAND_CONFIG.contact.email}
-            </div>
           </motion.div>
         </div>
       )}

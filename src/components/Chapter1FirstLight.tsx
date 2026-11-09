@@ -1,5 +1,5 @@
 import { ButterflyFlight } from './ButterflyFlight';
-import envisionedBespokeHome from '../assets/images/envisioned_bespoke_home_1792166097774.jpg';
+import heroLivingRoom from '../assets/images/hero_living_room_selected.png';
 import React from 'react';
 import { motion } from 'motion/react';
 
@@ -17,7 +17,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
       {/* Background Cinematic Photo with Settle Motion */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.img
-          src={envisionedBespokeHome}
+          src={heroLivingRoom}
           alt="An apartment living room opening onto a lush private garden"
           referrerPolicy="no-referrer"
           initial={{ scale: 1.04, opacity: 0.94 }}
@@ -83,24 +83,24 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
       <div className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-24 pt-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           {/* Lower-left Typography Block */}
-          <div className="lg:col-span-8 flex flex-col items-start">
+          <div className="lg:col-span-10 flex flex-col items-start">
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[#E0D9C9] font-serif-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[1.05] font-normal mb-6 max-w-2xl"
+              className="text-[#E0D9C9] font-serif-display text-[clamp(1.2rem,4.8vw,2.55rem)] lg:text-[clamp(2.45rem,3.8vw,3.9rem)] tracking-tight leading-[1.05] font-normal mb-6 max-w-none"
             >
-              <span className="block whitespace-nowrap">Made for the way</span>
-              <span className="block whitespace-nowrap italic font-light">you live.</span>
+              <span className="block whitespace-nowrap">Homes are built. Lives</span>
+              <span className="block whitespace-nowrap italic font-light">are lived. We do both.</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[#E0D9C9]/90 text-[18px] md:text-xl font-light leading-relaxed tracking-wide max-w-lg mb-8"
+              className="text-[#E0D9C9]/90 text-base md:text-lg font-light leading-relaxed tracking-wide max-w-lg mb-8"
             >
-              A home shaped around your rhythms, your rituals and all the little things that make it yours.
+              Personalized, thoughtfully designed homes, with a dedicated team that plans the community’s life for you, from festivals to fitness to family weekends.
             </motion.p>
 
             {/* Contextual Hero CTA: "See our work" */}
@@ -114,7 +114,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
               className="group inline-flex items-center gap-3.5 bg-[#59212C] text-[#E0D9C9] px-8 py-3.5 text-xs md:text-sm tracking-[0.16em] uppercase font-medium transition-colors duration-200 min-h-[48px] rounded-full shadow-lg border border-[#E0D9C9]/10 relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E0D9C9]"
             >
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span>Make it yours</span>
+              <span>See what living here looks like</span>
               <svg
                 className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1"
                 fill="none"
@@ -127,9 +127,9 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
           </div>
 
           {/* Right Column: Scroll line & chapter indicator */}
-          <div className="lg:col-span-4 flex flex-col lg:items-end justify-end mt-6 lg:mt-0">
+          <div className="lg:col-span-2 flex flex-col lg:items-end justify-end mt-6 lg:mt-0">
             <motion.a
-              href="#home-design"
+              href="#home-lifestyle"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.6 }}
@@ -141,7 +141,7 @@ export const Chapter1FirstLight: React.FC<Chapter1Props> = ({ onDiscoverClick })
               aria-label="Scroll to explore Make"
             >
               <span className="text-[11px] font-accent tracking-[0.22em] text-[#E0D9C9]/90 font-medium">
-                DESIGNED AROUND YOU
+                Lived with you.
               </span>
               <div className="w-12 lg:w-px h-px lg:h-20 bg-[#E0D9C9]/25 relative overflow-hidden">
                 <motion.div
