@@ -240,7 +240,11 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      <Footer onNavigate={navigateTo} onOpenEnquiry={() => handleOpenEnquiry()} />
+      <Footer
+        onNavigate={navigateTo}
+        onOpenEnquiry={() => handleOpenEnquiry()}
+        onExploreSection={scrollToSection}
+      />
 
       {/* Direct Enquiry Side Panel */}
       <EnquiryDrawer

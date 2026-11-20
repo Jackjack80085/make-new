@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import {
   ArrowLeft,
-  ArrowUpRight,
   ArrowRight,
   MapPin,
   Sparkles,
@@ -342,51 +341,88 @@ const ProjectShowcaseBlock: React.FC<{
         </AnimatePresence>
       </div>
 
-      {/* Expressive Triple-Pillar Story Spread */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start pt-2">
-        {/* Left: Core Essence Quote */}
-        <div className="lg:col-span-5 space-y-4">
-          <p className="font-serif-display text-xl sm:text-2xl text-[#242D36] font-normal leading-relaxed italic">
-            “{project.tagline}”
-          </p>
-          <p className="text-[15px] sm:text-[16px] text-[#242D36]/80 font-light leading-relaxed">
-            {project.essence}
-          </p>
+      {/* Editorial project notes and considered details */}
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="relative isolate overflow-hidden border-y border-[#242D36]/15 bg-[#E8E1D2]/20 py-9 sm:py-11 lg:py-14"
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-75"
+          style={{
+            backgroundImage: `radial-gradient(ellipse at 82% 12%, rgba(217,199,165,.19), transparent 46%), linear-gradient(112deg, rgba(255,255,255,.16), transparent 42%, rgba(89,33,44,.025)), url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.13'/%3E%3C/svg%3E")`,
+            backgroundSize: '100% 100%, 100% 100%, 180px 180px',
+            backgroundBlendMode: 'normal, normal, multiply',
+          }}
+        />
 
-          <div className="pt-2 flex flex-wrap items-center gap-3">
-            <button
-              onClick={onExploreProject}
-              className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#59212C] text-[#E0D9C9] hover:bg-[#431821] text-xs font-accent uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer shadow-xs"
-            >
-              <span>Explore Overview</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={onOpenEnquiry}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#242D36]/25 hover:border-[#59212C] hover:text-[#59212C] text-xs font-accent uppercase tracking-[0.16em] transition-colors cursor-pointer"
-            >
-              <span>Enquire</span>
-            </button>
+        <div className="relative z-10 mb-8 flex flex-wrap items-center justify-between gap-3 sm:mb-10">
+          <span className="inline-flex items-center gap-3 font-accent text-[10px] font-semibold uppercase tracking-[0.22em] text-[#59212C] sm:text-xs">
+            <span className="h-px w-7 bg-[#59212C]/65" />
+            A closer look at {project.name.replace('Make ', '')}
+          </span>
+          <span className="font-accent text-[10px] uppercase tracking-[0.18em] text-[#242D36]/50 sm:text-xs">
+            {project.orientation}
+          </span>
+        </div>
+
+        <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="lg:col-span-5">
+            <p className="max-w-xl font-serif-display text-2xl font-normal italic leading-[1.2] tracking-tight text-[#242D36] sm:text-3xl lg:text-[2.5rem]">
+              {project.tagline}
+            </p>
+            <p className="mt-5 max-w-xl text-sm font-light leading-7 text-[#242D36]/75 sm:text-base sm:leading-8">
+              {project.essence}
+            </p>
+
+            <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">
+              <button
+                onClick={onExploreProject}
+                className="group inline-flex min-h-10 items-center border-b border-[#59212C]/45 py-2 text-[10px] font-medium uppercase tracking-[0.16em] text-[#59212C] transition-colors hover:border-[#59212C] hover:text-[#431821] sm:text-xs"
+              >
+                Explore the project
+              </button>
+              <button
+                onClick={onOpenEnquiry}
+                className="inline-flex min-h-10 items-center border-b border-[#242D36]/25 py-2 text-[10px] uppercase tracking-[0.16em] text-[#242D36]/75 transition-colors hover:border-[#59212C]/70 hover:text-[#59212C] sm:text-xs"
+              >
+                Enquire
+              </button>
+            </div>
+          </div>
+
+          <div className="relative lg:col-span-7 lg:pl-3">
+            <div className="mb-3 flex items-baseline justify-between gap-4 border-b border-[#242D36]/15 pb-3">
+              <h3 className="font-serif-display text-xl text-[#242D36] sm:text-2xl">Considered, down to the detail.</h3>
+              <span className="shrink-0 font-accent text-[10px] uppercase tracking-[0.18em] text-[#242D36]/45">A few essentials</span>
+            </div>
+            <div>
+              {project.metrics.map((m, mIdx) => (
+                <div
+                  key={m.label}
+                  className="group relative grid grid-cols-[2.5rem_1fr] items-baseline gap-4 border-b border-[#242D36]/12 py-4 transition-[padding,border-color] duration-300 hover:border-[#59212C]/35 hover:pl-2 sm:grid-cols-[3.25rem_1fr_auto] sm:gap-5 sm:py-5"
+                >
+                  <span className="font-serif-display text-xl italic text-[#59212C]/45 transition-colors duration-300 group-hover:text-[#59212C] sm:text-2xl">
+                    0{mIdx + 1}
+                  </span>
+                  <div className="min-w-0">
+                    <span className="block font-accent text-[9px] font-semibold uppercase tracking-[0.2em] text-[#59212C]/75 sm:text-[10px]">
+                      {m.label}
+                    </span>
+                    <span className="mt-1 block font-serif-display text-lg leading-snug text-[#242D36] sm:text-xl">
+                      {m.value}
+                    </span>
+                  </div>
+                  <span className="hidden h-px w-8 origin-right bg-[#59212C]/35 transition-transform duration-300 group-hover:scale-x-125 sm:block" aria-hidden="true" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-
-        {/* Right: Architectural Specifics (Metrics) */}
-        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {project.metrics.map((m, mIdx) => (
-            <div
-              key={mIdx}
-              className="p-4 sm:p-5 rounded-xl bg-[#E5DFD0]/60 border border-[#242D36]/10 flex flex-col justify-between"
-            >
-              <span className="text-[11px] font-accent uppercase tracking-[0.18em] text-[#59212C] font-semibold block mb-2">
-                {m.label}
-              </span>
-              <span className="font-serif-display text-base sm:text-lg text-[#242D36] font-normal leading-snug">
-                {m.value}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
+      </motion.div>
     </article>
   );
 };
