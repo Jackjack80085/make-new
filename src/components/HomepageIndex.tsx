@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import foundersDesignTable from '../assets/images/founders_design_table_1792166121676.jpg';
@@ -43,6 +43,79 @@ const designDetails = [
     note: 'For everything beyond that, we’ve lined up a small group of architects and contractors we trust. Your first consultation is free. If you’d like them to do the work, you hire them directly, and they’ll handle it end to end, from ideas to installation.',
   },
 ];
+
+const finishOptions = {
+  Paint: [{ name: 'Limewash', color: '#D9D1BF' }, { name: 'Soft olive', color: '#A8AD91' }, { name: 'Warm clay', color: '#B77D68' }, { name: 'Deep forest', color: '#536253' }],
+  'Floors & Tiles': [{ name: 'Pale limestone', color: '#D4C7AC' }, { name: 'Ivory terrazzo', color: '#C8BBA4' }, { name: 'Smoked oak', color: '#87664E' }, { name: 'Dark stone', color: '#6B655C' }],
+  'Bath Fittings': [{ name: 'Brushed brass', color: '#B3945F' }, { name: 'Soft chrome', color: '#AEB4B0' }, { name: 'Dark bronze', color: '#51463D' }],
+  'Add-ons': [{ name: 'Natural oak', color: '#B38B63' }, { name: 'Walnut', color: '#674A3B' }, { name: 'Blackened oak', color: '#373936' }],
+  Interiors: [{ name: 'Oat linen', color: '#C5B99F' }, { name: 'Olive weave', color: '#737865' }, { name: 'Rust velvet', color: '#9A6251' }, { name: 'Ink blue', color: '#394B55' }],
+};
+
+const RoomVisualizer: React.FC<{ wall: string; floor: string; furniture: string; fixture: string }> = ({ wall, floor, furniture, fixture }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [view, setView] = useState({ yaw: -0.42, pitch: 0.16 });
+  const drag = useRef<{ x: number; y: number; yaw: number; pitch: number } | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const bounds = canvas.getBoundingClientRect();
+    canvas.width = bounds.width * dpr;
+    canvas.height = bounds.height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const w = bounds.width, h = bounds.height;
+    const project = ([x, y, z]: number[]) => {
+      const dx = x, dz = z;
+      const rx = dx * Math.cos(view.yaw) + dz * Math.sin(view.yaw);
+      const rz = -dx * Math.sin(view.yaw) + dz * Math.cos(view.yaw);
+      const yy = y - 1.4;
+      const py = yy * Math.cos(view.pitch) - rz * Math.sin(view.pitch);
+      const depth = 10 + yy * Math.sin(view.pitch) + rz * Math.cos(view.pitch);
+      const scale = Math.min(w, h) * 0.72 / depth;
+      return [w / 2 + rx * scale, h * 0.54 - py * scale] as [number, number];
+    };
+    const poly = (pts: number[][], color: string, stroke = 'rgba(50,45,38,.2)') => {
+      const p = pts.map(project);
+      ctx.beginPath(); ctx.moveTo(...p[0]); p.slice(1).forEach(v => ctx.lineTo(...v)); ctx.closePath();
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke();
+    };
+    const box = (x: number, y: number, z: number, sx: number, sy: number, sz: number, color: string) => {
+      const a=[x,y,z], b=[x+sx,y,z], c=[x+sx,y,z+sz], d=[x,y,z+sz];
+      const A=[x,y+sy,z], B=[x+sx,y+sy,z], C=[x+sx,y+sy,z+sz], D=[x,y+sy,z+sz];
+      poly([A,B,C,D], color); poly([a,d,D,A], color); poly([b,c,C,B], color);
+      poly([d,c,C,D], color); poly([a,b,c,d], color);
+    };
+    ctx.clearRect(0,0,w,h);
+    const bg = ctx.createLinearGradient(0,0,0,h); bg.addColorStop(0,'#eee8dc'); bg.addColorStop(1,'#c9bca6'); ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+    // Room shell: back wall, side wall and floor, projected from 3D coordinates.
+    poly([[-4,0,-3],[4,0,-3],[4,4,-3],[-4,4,-3]], wall);
+    poly([[-4,0,-3],[-4,0,3],[-4,4,3],[-4,4,-3]], '#c8c0b0');
+    poly([[-4,0,-3],[4,0,-3],[4,0,3],[-4,0,3]], floor);
+    // Garden window, framed in the rear wall.
+    poly([[-2.9,.75,-2.96],[-.2,.75,-2.96],[-.2,3.25,-2.96],[-2.9,3.25,-2.96]], '#647365');
+    poly([[-2.78,.9,-2.94],[-.32,.9,-2.94],[-.32,3.1,-2.94],[-2.78,3.1,-2.94]], '#b7c3ad');
+    poly([[-1.62,.9,-2.92],[-1.54,.9,-2.92],[-1.54,3.1,-2.92],[-1.62,3.1,-2.92]], '#e5ddcd');
+    poly([[-2.78,1.95,-2.92],[-.32,1.95,-2.92],[-.32,2.03,-2.92],[-2.78,2.03,-2.92]], '#e5ddcd');
+    // Sofa, coffee table and brass floor lamp.
+    box(-.1,0,-1.1,2.8,.48,1.25,'#695847');
+    box(-.1,.45,-1.15,2.8,.58,.35,furniture);
+    box(-.35,.43,-.95,.7,.48,.82,furniture); box(1.75,.43,-.95,.7,.48,.82,furniture);
+    box(.65,0,.85,1.25,.24,.72,'#73583f'); box(.72,.24,.62,.1,.5,.1,'#5e4c39'); box(1.7,.24,.62,.1,.5,.1,'#5e4c39');
+    // A small floor lamp with a live fitting finish.
+    const lamp = project([2.7,0,-.8]), lampTop=project([2.7,2.2,-.8]);
+    ctx.strokeStyle=fixture; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(...lamp); ctx.lineTo(...lampTop); ctx.stroke();
+    const shade=project([2.7,2.23,-.8]); ctx.fillStyle=fixture; ctx.beginPath(); ctx.arc(...shade, 12, 0, Math.PI*2); ctx.fill();
+    // Subtle floor plank joints add scale and material depth.
+    ctx.strokeStyle='rgba(74,64,50,.16)'; ctx.lineWidth=1;
+    for(let z=-2.5;z<=2.5;z+=.75){const p1=project([-3.9,.01,z]),p2=project([3.9,.01,z]);ctx.beginPath();ctx.moveTo(...p1);ctx.lineTo(...p2);ctx.stroke();}
+  }, [wall, floor, furniture, fixture, view]);
+
+  return <canvas ref={canvasRef} className="h-full w-full touch-none cursor-grab active:cursor-grabbing" aria-label="Interactive 3D room preview. Drag to orbit the room." onPointerDown={e => { drag.current = { x:e.clientX, y:e.clientY, ...view }; e.currentTarget.setPointerCapture(e.pointerId); }} onPointerMove={e => { if (!drag.current) return; const dx=e.clientX-drag.current.x, dy=e.clientY-drag.current.y; setView({ yaw:drag.current.yaw+dx*.008, pitch:Math.max(-.32,Math.min(.48,drag.current.pitch+dy*.006)) }); }} onPointerUp={() => { drag.current = null; }} />;
+};
 
 const lifestyleMoments = [
   {
@@ -90,6 +163,7 @@ export const HomepageIndex: React.FC = () => {
   const [activeMoment, setActiveMoment] = useState(0);
   const [carouselDirection, setCarouselDirection] = useState(1);
   const [activeDesignDetail, setActiveDesignDetail] = useState(0);
+  const [finishColor, setFinishColor] = useState('#D9D1BF');
   const reduceMotion = useReducedMotion();
 
   return (
@@ -269,9 +343,6 @@ export const HomepageIndex: React.FC = () => {
           <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#242D36]/75">
             Every Make home comes properly thought through. The rooms catch the light, the air moves the way it should, and there’s green wherever you look. All of that is already taken care of, so you can just enjoy it.
           </p>
-          <p className="mt-4 max-w-2xl text-sm sm:text-base leading-relaxed text-[#242D36]/65">
-            Then you get to make it yours. Pick your wall colours, floors, tiles and bathroom fittings from options we’ve put together, and we’ll take care of the rest. No hunting for contractors, no chasing suppliers. You choose, we do the work, and it’s ready when you move in. Want to go further with wardrobes, kitchens or furniture? Our trusted architects and contractors can take it from there.
-          </p>
           <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 font-accent text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-[#59212C]">
             {designDetails.map((detail, index) => (
               <React.Fragment key={detail.label}>
@@ -292,35 +363,26 @@ export const HomepageIndex: React.FC = () => {
             ))}
           </div>
         </motion.div>
-        <motion.figure
-          className="group relative mt-12 aspect-[16/7] min-h-52 overflow-hidden rounded-2xl border border-[#242D36]/20 bg-[#D4CCBA] shadow-[0_28px_70px_-38px_rgba(36,45,54,.65)] sm:mt-16 sm:min-h-72"
-          initial={reduceMotion ? false : { opacity: 0, y: 32, clipPath: 'inset(8% 0 0 0 round 1rem)' }}
-          whileInView={{ opacity: 1, y: 0, clipPath: 'inset(0% 0 0 0 round 1rem)' }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={designDetails[activeDesignDetail].label}
-              src={designDetails[activeDesignDetail].image}
-              alt={designDetails[activeDesignDetail].alt}
-              className="absolute inset-0 h-full w-full object-cover transition-[filter] duration-700 group-hover:saturate-[1.08]"
-              initial={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 1.045 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.99 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              loading="lazy"
-            />
-          </AnimatePresence>
-          <div className="pointer-events-none absolute inset-0 opacity-25 mix-blend-multiply" aria-hidden="true" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.12'/%3E%3C/svg%3E")`,
-          }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#242D36]/75 via-[#242D36]/5 to-transparent" />
-          <span className="absolute left-5 top-5 rounded-full border border-[#242D36]/20 bg-[#E0D9C9]/75 px-3 py-1.5 font-accent text-[9px] uppercase tracking-[0.18em] text-[#59212C] backdrop-blur-sm sm:left-7 sm:top-7">
-            A closer look at {designDetails[activeDesignDetail].label.toLowerCase()}
-          </span>
-          <span className="absolute bottom-6 right-5 font-accent text-[9px] uppercase tracking-[0.2em] text-[#E0D9C9]/75 sm:bottom-8 sm:right-8">MAKE / 0{activeDesignDetail + 1}</span>
-        </motion.figure>
+        <motion.div className="mt-12 overflow-hidden rounded-2xl border border-[#242D36]/15 bg-[#D9D1C0] shadow-[0_28px_70px_-38px_rgba(36,45,54,.45)] sm:mt-16" initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .15 }} transition={{ duration: .8 }}>
+          <div className="grid lg:grid-cols-[1.6fr_.8fr]">
+            <div className="relative min-h-[300px] overflow-hidden bg-[radial-gradient(ellipse_at_50%_20%,#fff8e8,#c8baa0)] sm:min-h-[440px]">
+              <div className="absolute inset-x-0 bottom-0 h-[30%] transition-colors duration-500" style={{ backgroundColor: activeDesignDetail === 1 ? finishColor : '#b9a98e' }} />
+              <RoomVisualizer wall={activeDesignDetail === 0 ? finishColor : '#D9D1BF'} floor={activeDesignDetail === 1 ? finishColor : '#B9A98E'} furniture={activeDesignDetail === 4 || activeDesignDetail === 3 ? finishColor : '#9B8067'} fixture={activeDesignDetail === 2 ? finishColor : '#B3945F'} />
+              <div className="absolute left-5 top-5 rounded-full border border-white/60 bg-[#f7f1e5]/75 px-4 py-2 font-accent text-[9px] uppercase tracking-[.2em] text-[#59212C] backdrop-blur">Room preview · live</div>
+            </div>
+            <div className="p-6 sm:p-8 lg:p-9">
+              <p className="font-accent text-[9px] uppercase tracking-[.2em] text-[#59212C]/70">Choose your finish</p>
+              <h3 className="mt-2 font-serif-display text-2xl">{designDetails[activeDesignDetail].label}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#242D36]/65">{designDetails[activeDesignDetail].note}</p>
+              <div className="mt-7 grid grid-cols-2 gap-3">
+                {finishOptions[designDetails[activeDesignDetail].label as keyof typeof finishOptions].map((option) => (
+                  <button key={option.name} type="button" onClick={() => setFinishColor(option.color)} aria-pressed={finishColor === option.color} className={`flex items-center gap-2 rounded-xl border p-2 text-left text-xs transition ${finishColor === option.color ? 'border-[#59212C] bg-white/55' : 'border-[#242D36]/15 hover:bg-white/35'}`}><span className="h-8 w-8 shrink-0 rounded-full border border-black/10" style={{ backgroundColor: option.color }} />{option.name}</button>
+                ))}
+              </div>
+              <p className="mt-6 font-accent text-[8px] uppercase tracking-[.16em] text-[#242D36]/45">Select a finish to see it in your room</p>
+            </div>
+          </div>
+        </motion.div>
         <AnimatePresence mode="wait" initial={false}>
           <motion.p
             key={designDetails[activeDesignDetail].label}
@@ -356,13 +418,18 @@ export const HomepageIndex: React.FC = () => {
           >
             <span className="mb-5 inline-flex items-center gap-3 font-accent text-[9px] uppercase tracking-[0.22em] text-[#D9C7A5]/85 sm:text-[10px]">
               <span className="h-px w-7 bg-[#D9C7A5]/70" />
-              Made with you, from the start
+              A note in our own words
             </span>
             <h2 id="founders-note-title" className="font-serif-display text-4xl leading-[1.02] tracking-tight sm:text-5xl lg:text-6xl">
-              Elevate your lifestyle.<br /><span className="italic font-light text-[#D9C7A5]">Express yourself.</span>
+              We build with care, <span className="italic font-light text-[#D9C7A5]">because someone will live here.</span>
             </h2>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#E0D9C9]/80 sm:text-lg">
-              Your home is one of the most personal things you’ll create. We’ll be alongside you from our first conversation to the day you settle in—listening closely, guiding every choice, and looking after the details that make it feel like yours.
+            <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-[#E0D9C9]/80 sm:text-lg">
+              <p>A while back, the three of us were walking around yet another new project. Anish stopped in the lobby and said, “Haven’t we been here before?” We hadn’t. Siddharth looked around: “I’ve seen more personality in a hospital waiting room.” Gautham shrugged. “Same beige, same lobby, same promise. Someone’s going to pay a lot of money to live in a photocopy.”</p>
+              <p>That’s when it clicked. Homes should say something about the people living in them, and what happens around them matters as much as the four walls.</p>
+              <p>So we’re building places we’d actually want to live in. A bit of personality, and a lot more going on.</p>
+            </div>
+            <p className="mt-6 font-accent text-[10px] uppercase tracking-[0.18em] text-[#D9C7A5]/90 sm:text-[11px]">
+              Gautham Somana, Siddharth Somana and Anish Das
             </p>
           </motion.div>
 
@@ -383,19 +450,6 @@ export const HomepageIndex: React.FC = () => {
               transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1] }}
               loading="lazy"
             />
-            <div className="pointer-events-none absolute inset-0 opacity-20 mix-blend-soft-light" aria-hidden="true" style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='founderGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23founderGrain)' opacity='0.16'/%3E%3C/svg%3E")`,
-            }} />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#32191E]/75 via-transparent to-[#32191E]/10" />
-            <span className="absolute left-4 top-4 rounded-full border border-[#E0D9C9]/45 bg-[#49272C]/60 px-3 py-1.5 font-accent text-[9px] uppercase tracking-[0.18em] text-[#E0D9C9] backdrop-blur-sm sm:left-6 sm:top-6">
-              The people behind Make
-            </span>
-            <figcaption className="absolute inset-x-4 bottom-4 rounded-xl border border-[#E0D9C9]/50 bg-[#E0D9C9]/95 p-4 shadow-xl backdrop-blur-md sm:inset-x-6 sm:bottom-6 sm:p-5">
-              <span className="font-accent text-[8px] uppercase tracking-[0.2em] text-[#59212C]/75 sm:text-[9px]">A note from our founders</span>
-              <p className="mt-2 max-w-lg font-serif-display text-base italic leading-snug text-[#242D36]/80 sm:text-xl">
-                We’re here to make the journey feel as thoughtful as the home.
-              </p>
-            </figcaption>
           </motion.figure>
         </div>
 
